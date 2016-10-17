@@ -16,6 +16,7 @@
   "author": "tommyzqfeng",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.1.2",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "connect-flash": "^0.1.1",
