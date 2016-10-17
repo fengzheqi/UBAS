@@ -2,9 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>Home</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/user.css">
 </head>
-<body>
+<body id="app">
+  <div class="header">
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <a href="index.html"><img src="img/logo.png" alt="" /></a>
+        </div>
+        <div class="navigation">
+          <span class="menu"></span>
+          <ul class="navig">
+            <li><a href="index.html"  class="active hvr-bounce-to-bottom">首页</a></li>
+            <li><a href="about.html" class="hvr-bounce-to-bottom">关于</a></li>
+            <li><a href="contact.html" class="hvr-bounce-to-bottom">联系</a></li>
+          </ul>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
 
+  <div class="banner">
+    <div class="container">
+      <div class="banner-top">
+        <h1>登录</h1>
+        <form class="banner-bottom" >
+          <div class="bnr-one">
+            <div class="bnr-left">
+              <p>用户名</p>
+            </div>
+            <div class="bnr-right">
+              <input type="text" value="">
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="bnr-one">
+            <div class="bnr-left">
+              <p>密码</p>
+            </div>
+            <div class="bnr-right">
+              <input type="password" value="">
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="bnr-btn">
+              <input type="submit" value="确定">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="introduce">
+    <div class="container">
+      <div class="introduce-top">
+        <h3>产品特点</h3>
+        <p>Product Features</p>
+      </div>
+      <div class="introduce-bottom">
+        <div class="col-md-4 introduce-left">
+          <span class="w-one"></span>
+          <p>Phasellus sit <label>amet</label> purus sagittis, <label>fringilla</label> dui vel, tristique justo. Proin sit amet justo elementum, fringilla lacus sit amet, viverra velit.</p>
+        </div>
+        <div class="col-md-4 introduce-left">
+          <span class="w-two"></span>
+          <p>Phasellus sit <label>amet</label> purus sagittis, <label>fringilla</label> dui vel, tristique justo. Proin sit amet justo elementum, fringilla lacus sit amet, viverra velit.</p>
+        </div>
+        <div class="col-md-4 introduce-left">
+          <span class="w-tre"></span>
+          <p>Phasellus sit <label>amet</label> purus sagittis, <label>fringilla</label> dui vel, tristique justo. Proin sit amet justo elementum, fringilla lacus sit amet, viverra velit.</p>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <div class="touch-top">
+        <h3>联系我们</h3>
+      </div>
+      <div class="touch-bottom">
+        <p>智能互联网技术湖北省重点实验室 网络应用与数据库研究室</p>
+        <h6 >办公电话/传真：027-87558397</h6>
+      </div>
+    </div>
+  </div>
+
+  <script src="bower_components/vue/dist/vue.min.js"></script>
+  <script src=""></script>
 </body>
 </html>
