@@ -20,14 +20,7 @@ const async = require('async');
  * @param id
  */
 exports.userByID = function (req, res, next, id) {
-    User.findOne({
-        _id: id
-    }).exec(function (err, user) {
-        if (err) return next(err);
-        if (!user) return next(new Error('载入用户信息失败'));
-        req.profile = user;
-        next();
-    });
+
 };
 
 /**
@@ -73,23 +66,7 @@ exports.hasAuthorization = function (roles) {
  * @param res
  */
 exports.signup = function (req, res) {
-    delete req.body.roles;
-    delete req.body.isActive;
 
-    var user = new User(req.body);
-    var message = null;
-
-    user.provider = 'local';
-
-    user.save(function (err) {
-        if (err) {
-            return res.status(400).send({
-                message: err
-            })
-        } else {
-            res.json(user);
-        }
-    });
 };
 
 /**

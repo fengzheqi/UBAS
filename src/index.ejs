@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Home</title>
+  <title><%=title%></title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/user.css">
 </head>
@@ -29,8 +29,8 @@
   <div class="banner">
     <div class="container">
       <div class="banner-top">
-        <h1>登录</h1>
-        <form class="banner-bottom" >
+        <h1>登录 | 注册</h1>
+        <form class="banner-bottom" action="/auth/signin">
           <div class="bnr-one">
             <div class="bnr-left">
               <p>用户名</p>

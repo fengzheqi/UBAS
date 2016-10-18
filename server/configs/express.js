@@ -33,20 +33,23 @@ const env = process.env.NODE_ENV || 'development';
 
 /* Expose */
 module.exports = function (app, passport) {
-    /* Compression middleware (should be placed before express.static) */
+    /* 压缩服务端静态文件 */
     app.use(compression({
         threshold: 512
     }));
 
+    /* 配置CORS */
     app.use(cors());
 
+    /* 配置静态资源路径 */
     app.use(express.static(config.root + '/src'))
 
+    /* 在生产环境下用winston */
     let log = 'dev';
     if (env !== 'development') {
         log = {
             stream: {
-                write: message => winston.info('hello')
+                write: message => winston.info(message)
             }
         };
     }
@@ -102,11 +105,7 @@ module.exports = function (app, passport) {
     // should be declared after session and flash
     app.use(helpers(pkg.name));
 
-    tools.getGlobbedFiles('./server/routes/*.js').forEach(function (routePath) {
-       require(path.resolve(routePath))(app);
-    });
-
-    app.use('/', routes);
+    // app.use('/', routes);
 
     if (env !== 'test') {
         app.use(csrf());
@@ -117,6 +116,34 @@ module.exports = function (app, passport) {
             next();
         });
     }
+
+    /* 错误相应 */
+    app.use(function(err, req, res, next){
+        if (err.message
+            && (~err.message.indexOf('not found'))
+            && (~err.message.indexOf('Cast to ObjectId failed'))) {
+            return next();
+        }
+
+        console.error(err.stack);
+
+        if(err.stack.includes('ValidationError')) {
+            res.status(422).render('422', {error: err.stack});
+            return;
+        }
+
+        res.status(500).render('500', {error: err.stack})
+    });
+
+    /* 404响应 */
+    app.use(function (req, res) {
+        const payload ={
+            url: req.originalUrl,
+            error: 'Not found'
+        };
+        if (req.accepts('html')) return res.status(404).render('404', payload);
+        res.status(404).render('404', payload);
+    });
 
     if (env === 'development') {
         app.locals.pretty = true;
