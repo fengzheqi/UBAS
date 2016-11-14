@@ -24,10 +24,10 @@ const winston = require('winston');
 const helpers = require('view-helpers');
 const config = require('./');
 const tools = require('./tools');
-const pkg = require('../../package.json');
+const pkg = require('../package.json');
 const path = require('path');
 
-var routes = require('./../routes/index');
+var routes = require('../server/routes/index');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -42,7 +42,7 @@ module.exports = function (app, passport) {
     app.use(cors());
 
     /* 配置静态资源路径 */
-    app.use(express.static(config.root + '/src'))
+    app.use(express.static(config.root + '/public'));
 
     /* 在生产环境下用winston */
     let log = 'dev';
@@ -59,10 +59,14 @@ module.exports = function (app, passport) {
     if (env !== 'test') app.use(morgan(log));
 
     // set views path, template engine and default layout
-    app.set('views', config.root + '/src');
+    app.set('views', config.root + '/public');
     app.set('view engine', 'ejs');
 
     // expose package.json to views
+
+
+
+
     app.use(function (req, res, next) {
         res.locals.pkg = pkg;
         res.locals.env = env;
@@ -105,7 +109,7 @@ module.exports = function (app, passport) {
     // should be declared after session and flash
     app.use(helpers(pkg.name));
 
-    // app.use('/', routes);
+    //app.use('/', routes(app));
 
     if (env !== 'test') {
         app.use(csrf());
@@ -118,32 +122,32 @@ module.exports = function (app, passport) {
     }
 
     /* 错误相应 */
-    app.use(function(err, req, res, next){
-        if (err.message
-            && (~err.message.indexOf('not found'))
-            && (~err.message.indexOf('Cast to ObjectId failed'))) {
-            return next();
-        }
+    // app.use(function(err, req, res, next){
+    //     if (err.message
+    //         && (~err.message.indexOf('not found'))
+    //         && (~err.message.indexOf('Cast to ObjectId failed'))) {
+    //         return next();
+    //     }
+    //
+    //     console.error(err.stack);
+    //
+    //     if(err.stack.includes('ValidationError')) {
+    //         res.status(422).render('422', {error: err.stack});
+    //         return;
+    //     }
+    //
+    //     res.status(500).render('500', {error: err.stack})
+    // });
 
-        console.error(err.stack);
-
-        if(err.stack.includes('ValidationError')) {
-            res.status(422).render('422', {error: err.stack});
-            return;
-        }
-
-        res.status(500).render('500', {error: err.stack})
-    });
-
-    /* 404响应 */
-    app.use(function (req, res) {
-        const payload ={
-            url: req.originalUrl,
-            error: 'Not found'
-        };
-        if (req.accepts('html')) return res.status(404).render('404', payload);
-        res.status(404).render('404', payload);
-    });
+    // /* 404响应 */
+    // app.use(function (req, res) {
+    //     const payload ={
+    //         url: req.originalUrl,
+    //         error: 'Not found'
+    //     };
+    //     if (req.accepts('html')) return res.status(404).render('404', payload);
+    //     res.status(404).render('404', payload);
+    // });
 
     if (env === 'development') {
         app.locals.pretty = true;

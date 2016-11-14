@@ -5,7 +5,7 @@
  */
 'use strict';
 
-const user = require('../controllers/user/user.server.controllers');
+const user = require('../controllers/user.server.controllers');
 
 const fail = {
     failureRedirect: '/'

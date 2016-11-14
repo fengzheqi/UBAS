@@ -13,7 +13,7 @@ const join = require('path').join;
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const config = require('./server/configs');
+const config = require('./configs');
 
 const models = join(__dirname, 'server/models');
 const routes = join(__dirname, 'server/routes');
@@ -30,11 +30,12 @@ fs.readdirSync(models)
     .forEach(file => require(join(models, file)));
 
 /* 配置启动路径 */
-require('./server/configs/passport')(passport);
-require('./server/configs/express')(app, passport);
+require('./configs/passport')(passport);
+require('./configs/express')(app, passport);
 fs.readdirSync(routes)
     .filter(file => ~file.search(/^[^\.].*\.js$/))
     .forEach(file => require(join(routes, file))(app));
+
 
 /* 启动系统 */
 connect()

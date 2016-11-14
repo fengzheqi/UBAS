@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/cross-env NODE_ENV=development ./node_modules/.bin/nodemon server.js"
+    "start": "./node_modules/.bin/cross-env NODE_ENV=development ./node_modules/.bin/nodemon server.js",
+    "webpack": "./node_modules/.bin/webpack"
   },
   "keywords": [
     "usa",
@@ -18,6 +19,7 @@
   "dependencies": {
     "async": "^2.1.2",
     "body-parser": "^1.15.2",
+    "co": "^4.6.0",
     "compression": "^1.6.2",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^1.3.2",
@@ -38,6 +40,7 @@
     "mongoose": "^4.6.3",
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
+    "only": "0.0.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "serve-favicon": "^2.3.0",
@@ -46,6 +49,8 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   }
 }
