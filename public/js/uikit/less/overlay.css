@@ -1,0 +1,165 @@
+/* ========================================================================
+   Component: Overlay
+ ========================================================================== */
+/*
+ * 1. Container width fits its content
+ * 2. Create position context
+ * 3. Set max-width for responsive images to prevent `inline-block` consequences
+ * 4. Remove the gap between the container and its child element
+ * 5. Fixed wrong scaling calculation for images in Chrome
+ */
+.uk-overlay {
+  /* 1 */
+  display: inline-block;
+  /* 2 */
+  position: relative;
+  /* 3 */
+  max-width: 100%;
+  /* 4 */
+  vertical-align: middle;
+  /* 5 */
+  overflow: hidden;
+}
+/*
+ * Remove margin from content
+ */
+.uk-overlay > :first-child {
+  margin-bottom: 0;
+}
+/* Sub-object `uk-overlay-area`
+ ========================================================================== */
+/*
+ * 1. Set position
+ * 2. Set style
+ * 3. Fade-in transition
+ */
+.uk-overlay-area {
+  /* 1 */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* 2 */
+  background: rgba(0, 0, 0, 0.3);
+  /* 3 */
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+/*
+ * Hover
+ * 1. `uk-hover` to support touch devices
+ * 2. Use optional `uk-overlay-toggle` to trigger the overlay earlier
+ */
+.uk-overlay:hover .uk-overlay-area,
+.uk-overlay.uk-hover .uk-overlay-area,
+.uk-overlay-toggle:hover .uk-overlay-area,
+.uk-overlay-toggle.uk-hover .uk-overlay-area {
+  opacity: 1;
+}
+/*
+ * Icon
+ */
+.uk-overlay-area:empty:before {
+  content: "\f002";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  margin-left: -25px;
+  font-size: 50px;
+  line-height: 1;
+  font-family: FontAwesome;
+  text-align: center;
+  color: #fff;
+}
+/* Sub-object `uk-overlay-area-content`
+ ========================================================================== */
+/*
+ * Remove whitespace between child elements when using `inline-block`
+ * Needed for Firefox
+ */
+.uk-overlay-area:not(:empty) {
+  font-size: 0.001px;
+}
+/*
+ * 1. Needed for vertical alignment
+ */
+.uk-overlay-area:not(:empty):before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+/*
+ * 1. Set vertical alignment
+ * 2. Reset whitespace hack
+ * 3. Set horizontal alignment
+ * 4. Set style
+ */
+.uk-overlay-area-content {
+  /* 1 */
+  display: inline-block;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  vertical-align: middle;
+  /* 2 */
+  font-size: 1rem;
+  /* 3 */
+  text-align: center;
+  /* 4 */
+  padding: 0 15px;
+  color: #fff;
+}
+/*
+ * Remove margin from the last-child
+ */
+.uk-overlay-area-content > :last-child {
+  margin-bottom: 0;
+}
+/*
+ * Links in overlay area
+ */
+.uk-overlay-area-content a:not([class]),
+.uk-overlay-area-content a:not([class]):hover {
+  color: inherit;
+}
+/* Sub-object `uk-overlay-caption`
+ ========================================================================== */
+/*
+ * 1. Set position
+ * 2. Set style
+ * 3. Fade-in transition
+ */
+.uk-overlay-caption {
+  /* 1 */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* 2 */
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  /* 3 */
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+/*
+ * Hover
+ * 1. `uk-hover` to support touch devices
+ * 2. Use optional `uk-overlay-toggle` to trigger the overlay earlier
+ */
+.uk-overlay:hover .uk-overlay-caption,
+.uk-overlay.uk-hover .uk-overlay-caption,
+.uk-overlay-toggle:hover .uk-overlay-caption,
+.uk-overlay-toggle.uk-hover .uk-overlay-caption {
+  opacity: 1;
+}

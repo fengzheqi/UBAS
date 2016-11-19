@@ -32,10 +32,6 @@ fs.readdirSync(models)
 /* 配置启动路径 */
 require('./configs/passport')(passport);
 require('./configs/express')(app, passport);
-fs.readdirSync(routes)
-    .filter(file => ~file.search(/^[^\.].*\.js$/))
-    .forEach(file => require(join(routes, file))(app));
-
 
 /* 启动系统 */
 connect()
@@ -55,7 +51,7 @@ function listen () {
 }
 
 /**
- * 连接Mongodb
+ * 连接数据库
  */
 function connect () {
     var options = { server: { socketOptions: { keepAlive: 1 } } };

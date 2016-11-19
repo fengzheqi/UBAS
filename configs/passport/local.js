@@ -5,31 +5,33 @@
  */
 'use strict';
 
+/**
+ *  Module dependencies
+ */
 const mongoose = require('mongoose');
 const LocalStrategy = require('passport-local').Strategy;
 const User = mongoose.model('User');
 
+/**
+ * Expose
+ */
 module.exports = new LocalStrategy({
-    usernameField: 'username',
+    usernameField: 'email',
     passwordField: 'password'
-}, function (username, password, done) {
+}, function (email, password, done) {
     const options = {
-        criteria: {username: username},
-        select: 'username email hashed_password salt'
+        criteria: {email: email},
+        select: 'name username email hashed_password salt'
     };
     User.load(options, function (err, user) {
         if (err) return done(err);
 
         if (!user) {
-            return done(null, false, {message: '用户不存在'});
+            return done(null, false, {message: '用户名错误'});
         }
 
         if (!user.authenticate(password)) {
             return done(null, false, {message: '密码错误'});
-        }
-
-        if (!user.isActive) {
-            return done(null, false, {message: '账号未激活'});
         }
 
         return done(null, user);

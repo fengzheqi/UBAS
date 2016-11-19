@@ -7,7 +7,6 @@
 
 /* Module dependencies */
 const path = require('path');
-const extend = require('util')._extend;
 
 const development = require('./env/devlopment');
 const production = require('./env/production');
@@ -29,8 +28,8 @@ const defaults = {
 
 /* Expose */
 module.exports = {
-    development: extend(development, defaults),
-    production: extend(production, defaults),
-    test: extend(test, defaults)
+    development: Object.assign(development, defaults),
+    production: Object.assign(production, defaults),
+    test: Object.assign(test, defaults)
 }[process.env.NODE_ENV || 'development'];
 

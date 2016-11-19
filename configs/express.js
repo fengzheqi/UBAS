@@ -23,11 +23,12 @@ const flash = require('connect-flash');
 const winston = require('winston');
 const helpers = require('view-helpers');
 const config = require('./');
-const tools = require('./tools');
+
 const pkg = require('../package.json');
 const path = require('path');
 
-var routes = require('../server/routes/index');
+const fs = require('fs');
+const routes = path.join(__dirname, '../server/routes');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -54,17 +55,11 @@ module.exports = function (app, passport) {
         };
     }
 
-    // Don't log during tests
-    // Logging middleware
+    /* 非测试环境下打印http log */
     if (env !== 'test') app.use(morgan(log));
 
-    // set views path, template engine and default layout
-    app.set('views', config.root + '/public');
-    app.set('view engine', 'ejs');
-
-    // expose package.json to views
-
-
+    app.set('views', config.root + '/public'); //设置views模板路径
+    app.set('view engine', 'ejs'); //设置view模板解析器
 
 
     app.use(function (req, res, next) {
@@ -109,8 +104,6 @@ module.exports = function (app, passport) {
     // should be declared after session and flash
     app.use(helpers(pkg.name));
 
-    //app.use('/', routes(app));
-
     if (env !== 'test') {
         app.use(csrf());
 
@@ -121,33 +114,38 @@ module.exports = function (app, passport) {
         });
     }
 
-    /* 错误相应 */
-    // app.use(function(err, req, res, next){
-    //     if (err.message
-    //         && (~err.message.indexOf('not found'))
-    //         && (~err.message.indexOf('Cast to ObjectId failed'))) {
-    //         return next();
-    //     }
-    //
-    //     console.error(err.stack);
-    //
-    //     if(err.stack.includes('ValidationError')) {
-    //         res.status(422).render('422', {error: err.stack});
-    //         return;
-    //     }
-    //
-    //     res.status(500).render('500', {error: err.stack})
-    // });
+    // 配置路由
+    fs.readdirSync(routes)
+      .filter(file => ~file.search(/^[^\.].*\.js$/))
+      .forEach(file => require(path.join(routes, file))(app));
 
-    // /* 404响应 */
-    // app.use(function (req, res) {
-    //     const payload ={
-    //         url: req.originalUrl,
-    //         error: 'Not found'
-    //     };
-    //     if (req.accepts('html')) return res.status(404).render('404', payload);
-    //     res.status(404).render('404', payload);
-    // });
+    /* 错误相应 */
+    app.use(function(err, req, res, next){
+        if (err.message
+            && (~err.message.indexOf('not found'))
+            && (~err.message.indexOf('Cast to ObjectId failed'))) {
+            return next();
+        }
+
+        console.error(err.stack);
+
+        if(err.stack.includes('ValidationError')) {
+            res.status(422).render('422', {error: err.stack});
+            return;
+        }
+
+        res.status(500).render('500', {error: err.stack})
+    });
+
+    /* 404响应 */
+    app.use(function (req, res) {
+        const payload ={
+            url: req.originalUrl,
+            error: 'Not found'
+        };
+        if (req.accepts('html')) return res.status(404).render('404', payload);
+        res.status(404).render('404', payload);
+    });
 
     if (env === 'development') {
         app.locals.pretty = true;

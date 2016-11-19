@@ -22,7 +22,7 @@ const ReportDataScheme = new Schema({
   link: {
     type:String, default: '', trim: true
   },
-  oldLink: {
+  referer: {
     type:String, default: '', trim: true
   },
   title: {
@@ -61,9 +61,14 @@ const ReportDataScheme = new Schema({
  * Methods
  */
 ReportDataScheme.methods = {
-  saveData: function () {
+  saveData: function (data) {
+    this.keyword = data.keyword;
+    this.sys = data.sys;
+    this.browser = data.browser;
+    this.ip = data.ip;
+    this.country = this.country;
     return this.save();
   }
-}
+};
 
 mongoose.model('ReportData', ReportDataScheme);
