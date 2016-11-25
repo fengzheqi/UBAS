@@ -8,14 +8,22 @@
 
 const mongoose = require('mongoose');
 const {wrap: async} = require('co');
-const {respond} = require('../utils');
+const {respond,respondOrRedirect} = require('../utils');
 const User = mongoose.model('User');
+const mailer = require('../mails');
 
 /**
  * Load
  */
-exports.load = async(function *(req, res, next, _username){
-  const criteria = {username:_username};
+exports.load = async(function *(req, res, next, param){
+  let criteria;
+  if ( 'userId' in req.params) {
+    criteria = {_id: param};
+  }
+  else {
+    criteria = {username:param};
+  }
+
   try {
     req.profile = yield  User.load({criteria});
     if (!req.profile) return next(new Error('用户未找到！'));
@@ -34,6 +42,7 @@ exports.signup = function (req, res) {
     user: new User()
   })
 };
+
 /**
  * 注册提交
  */
@@ -41,6 +50,7 @@ exports.create = async(function *(req, res) {
   const user = new User(req.body);
   user.provider = 'local';
   try {
+    mailer(user);
     yield user.save();
     req.logIn(user, err => {
       if (err) req.flash('info', '对不起，您无法登录系统！');
@@ -50,11 +60,24 @@ exports.create = async(function *(req, res) {
     const errors = Object.keys(err.errors)
       .map(field => err.errors[field].message);
 
-    res.render('user/signup', {
-      title: 'Sign up',
-      errors,
-      user
-    })
+    res.render('user/signup', {title: 'Sign up'});
+  }
+});
+
+exports.activeAccount = async(function *(req, res) {
+  if(req.query.isActive==1) {
+    const user = req.profile;
+    user.isActive = true;
+    try {
+      yield user.save();
+      req.flash('info', '您的账号已激活成功！');
+      res.redirect('/');
+      // respondOrRedirect({req, res}, url, obj, {type: 'info',text: '您的账号已激活成功！'});
+    } catch (err) {
+
+    }
+  } else {
+    res.redirect('/');
   }
 });
 
@@ -69,6 +92,7 @@ exports.signin = function (req, res) {
 exports.authCallback = function (req, res) {
   res.redirect('/users/' + req.user.username);
 };
+
 
 /**
  * 退出系统

@@ -10,11 +10,11 @@ const reportData = require('../controllers/reportData.server.controller')
 module.exports = function (app) {
   app.route('/')
     .get(function (req, res) {
-      var error = req.flash('info');
-      var message = req.flash('message');
+      let errorInfo = res.locals.errors;
+      let info = res.locals.info;
       res.render('index', {
         title: 'UBAS',
-        error: error
+        errorInfo: errorInfo
       });
     });
 

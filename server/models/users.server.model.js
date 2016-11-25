@@ -28,6 +28,7 @@ const UserSchem = new Scheme({
   hashed_password: {type: String, default: ''},
   salt: {type: String, default: ''},
   authToken: {type: String, default: ''},
+  isActive : {type: Boolean, default: false},
   github: {}
 });
 
@@ -143,7 +144,6 @@ UserSchem.methods = {
   skipValidation: function () {
     return ~oAuthTypes.indexOf(this.provider);
   }
-
 };
 
 /**
@@ -157,7 +157,7 @@ UserSchem.statics = {
    * @returns {*|Promise|Array|{index: number, input: string}}
    */
   load: function (options, cb) {
-    options.select = options.select || 'username email';
+    options.select = options.select || 'username email isActive';
     return this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);
