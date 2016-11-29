@@ -1,0 +1,11 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "linebreak-style": ["error", "windows"],
+    //unix环境下解决换行的报错
+    //"linebreak-style": ["error", "unix"]
+    "object-curly-newline": ["error", {
+      "ObjectExpression": "never"
+    }]
+  }
+}

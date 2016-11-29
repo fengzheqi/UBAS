@@ -5,7 +5,7 @@
  */
 
 var express = require('express');
-const reportData = require('../controllers/reportData.server.controller')
+const staticData = require('../controllers/staticData.server.controller')
 
 module.exports = function (app) {
   app.route('/')
@@ -19,6 +19,6 @@ module.exports = function (app) {
     });
 
   app.route('/_fe.gif')
-    .get(reportData.create);
+    .get(staticData.create);
 
 };

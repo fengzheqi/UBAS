@@ -3,13 +3,12 @@
  * @author tommyzqfeng
  * @date 2016/11/14
  */
-'use strict';
 
 const mongoose = require('mongoose');
 const {wrap: async} = require('co');
 const only = require('only');
 const rqt = require('request');
-const ReportData = mongoose.model('ReportData');
+const StaticData = mongoose.model('StaticData');
 
 
 /**
@@ -17,13 +16,13 @@ const ReportData = mongoose.model('ReportData');
  */
 exports.create = async(function *(req, res) {
   const data = req.query;
-  const reportData = new ReportData(only(data, 'link referer title screen guId timestamp'));
+  const staticData = new StaticData(only(data, 'url referer title screen gu_id timestamp following'));
   const regex = /^\:\:ffff\:/;
 
   let keyword = getKeyword(data.referer);
-  let sys = getSysInfo(data.userAgent);
+  let system = getSysInfo(data.userAgent);
   let browser = getBrowserType(data.userAgent);
-  let ip='', country='';
+  let ip='', address = {};
 
   if(regex.test(req.connection.remoteAddress.trim())) {
     ip = req.connection.remoteAddress.split('::ffff:')[1];
@@ -34,14 +33,16 @@ exports.create = async(function *(req, res) {
   let checkIpURL = 'http://ip.taobao.com/service/getIpInfo.php?ip=' + ip;
   rqt(checkIpURL, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      country = body.country?body.country:'';
+      address.country = body.country?body.country:'';
+      address.province = body.province?body.province:'';
+      address.city = body.city?body.city:'';
     }
-    reportData.saveData({
+    staticData.saveData({
       keyword: keyword,
-      sys: sys,
+      system: system,
       browser: browser,
       ip: ip,
-      country: country
+      address: address
     });
   });
 

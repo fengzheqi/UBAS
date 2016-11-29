@@ -4,8 +4,6 @@
  * @date 2016/10/11
  */
 
-'use strict';
-
 /**
  * Module dependencies
  */
@@ -14,23 +12,54 @@ const crypto = require('crypto');
 
 const Scheme = mongoose.Schema;
 const oAuthTypes = [
-  'github'
+  'github',
 ];
+
 
 /**
  * User Scheme
  */
 const UserSchem = new Scheme({
-  username: {type: String, default: ''},
-  email: {type: String, default: ''},
-  name: {type: String, default: ''},
-  provider: {type: String, default: ''},
-  hashed_password: {type: String, default: ''},
-  salt: {type: String, default: ''},
-  authToken: {type: String, default: ''},
-  isActive : {type: Boolean, default: false},
-  roles: {type: Array, default: []},
-  follows: {type: Array, default:[]}
+  username: {
+    type: String,
+    default: '',
+  },
+  email: {
+    type: String,
+    default: '',
+  },
+  name: {
+    type: String,
+    default: '',
+  },
+  provider: {
+    type: String,
+    default: '',
+  },
+  hashed_password: {
+    type: String,
+    default: '',
+  },
+  salt: {
+    type: String,
+    default: '',
+  },
+  authToken: {
+    type: String,
+    default: '',
+  },
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
+  roles: {
+    type: Array,
+    default: [],
+  },
+  follows: {
+    type: Array,
+    default: [],
+  },
 });
 
 const validatePresenceOf = value => value && value.length;
@@ -53,41 +82,41 @@ UserSchem.virtual('password')
  */
 UserSchem.path('name')
   .validate(function (name) {
-  if (this.skipValidation()) return true;
-  return name.length;
-}, '用户名不能为空');
+    if (this.skipValidation()) return true;
+    return name.length;
+  }, '用户名不能为空');
 
 UserSchem.path('email')
   .validate(function (email) {
-  if (this.skipValidation()) return true;
-  return email.length;
-}, '邮箱不能为空');
+    if (this.skipValidation()) return true;
+    return email.length;
+  }, '邮箱不能为空');
 
 UserSchem.path('email')
   .validate(function (email, fn) {
-  const User = mongoose.model('User');
-  if (this.skipValidation()) fn(true);
+    const User = mongoose.model('User');
+    if (this.skipValidation()) fn(true);
 
-  if (this.isNew || this.isModified('email')) {
-    User.find({email: email}).exec(function (err, users) {
-      fn(!err && users.length ===0);
-    });
-  } else {
-    fn(true);
-  }
-}, '邮箱已注册');
+    if (this.isNew || this.isModified('email')) {
+      User.find({email: email}).exec(function (err, users) {
+        fn(!err && users.length ===0);
+      });
+    } else {
+      fn(true);
+    }
+  }, '邮箱已注册');
 
 UserSchem.path('username')
   .validate(function (username) {
-  if (this.skipValidation()) return true;
-  return username.length;
-}, '用户名不能为空');
+    if (this.skipValidation()) return true;
+    return username.length;
+  }, '用户名不能为空');
 
 UserSchem.path('hashed_password')
   .validate(function (hashed_password) {
-  if (this.skipValidation()) return true;
-  return hashed_password.length && this._password.length;
-}, '密码不能为空');
+    if (this.skipValidation()) return true;
+    return hashed_password.length && this._password.length;
+  }, '密码不能为空');
 
 /**
  * Pre-save hook
@@ -144,7 +173,7 @@ UserSchem.methods = {
    */
   skipValidation: function () {
     return ~oAuthTypes.indexOf(this.provider);
-  }
+  },
 };
 
 /**
@@ -162,7 +191,7 @@ UserSchem.statics = {
     return this.findOne(options.criteria)
       .select(options.select)
       .exec(cb);
-  }
+  },
 };
 
 mongoose.model('User', UserSchem);

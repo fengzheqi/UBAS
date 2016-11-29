@@ -38,9 +38,8 @@
     //通过Image对象请求发送数据
     var img = new Image(1, 1);
 
-
     //获取当前的网址
-    var link = window.location.href;
+    var url = window.location.href;
     // 获取上页地址
     var oldlink = document.referrer;
     // 获取当前访问页的标题
@@ -48,15 +47,15 @@
     // 屏幕分辨率
     var screen = window.screen.width + "*" + window.screen.height;
     // 异步请求发送
-    str= 'link=' + encodeURIComponent(link) +
+    str= 'url=' + encodeURIComponent(url) +
       '&referer=' + encodeURIComponent(oldlink) +
       '&title=' + encodeURIComponent(titleName) +
       '&userAgent=' + navigator.userAgent.toLowerCase() +
       '&screen=' + screen +
-      '&guId=' + GetCookie('GUID') +
-      '&wwc=' + GetCookie('WWHCount') + "" +
+      '&gu_id=' + GetCookie('GUID') +
+      '&wwc=' + GetCookie('WWHCount') +
       '&timestamp=' + GetCookie('WWhenH') +
-      '&appId=' + appId;
+      '&following=' + appId;
 
     img.src = serverHost + '/_fe.gif?' + str;
   };
