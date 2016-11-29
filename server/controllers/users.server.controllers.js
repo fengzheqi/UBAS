@@ -59,11 +59,13 @@ exports.create = async(function *(req, res) {
   } catch (err) {
     const errors = Object.keys(err.errors)
       .map(field => err.errors[field].message);
-
-    res.render('user/signup', {title: 'Sign up'});
   }
 });
 
+/**
+ * 激活账号
+ *
+ */
 exports.activeAccount = async(function *(req, res) {
   if(req.query.isActive==1) {
     const user = req.profile;
@@ -92,7 +94,6 @@ exports.signin = function (req, res) {
 exports.authCallback = function (req, res) {
   res.redirect('/users/' + req.user.username);
 };
-
 
 /**
  * 退出系统

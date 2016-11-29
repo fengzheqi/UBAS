@@ -29,7 +29,7 @@
       </div>
 
       <!-- Add class "fade-in-effect" for login form effect -->
-      <form method="post" role="form" id="login" class="login-form fade-in-effect" action="/users/signin">
+      <form method="post" role="form" id="login" class="login-form fade-in-effect" action="/signin">
         <input type='hidden' name='_csrf' value='<%= csrf_token %>'/>
 
         <div class="login-header">
@@ -64,7 +64,7 @@
 
           <div class="info-links">
             <span>新用户</span> ->
-            <a href="signup">点击进入注册页面</a>
+            <a href="/signup">点击进入注册页面</a>
           </div>
 
         </div>

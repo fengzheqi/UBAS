@@ -21,15 +21,16 @@ const oAuthTypes = [
  * User Scheme
  */
 const UserSchem = new Scheme({
-  name: {type: String, default: ''},
-  email: {type: String, default: ''},
   username: {type: String, default: ''},
+  email: {type: String, default: ''},
+  name: {type: String, default: ''},
   provider: {type: String, default: ''},
   hashed_password: {type: String, default: ''},
   salt: {type: String, default: ''},
   authToken: {type: String, default: ''},
   isActive : {type: Boolean, default: false},
-  github: {}
+  roles: {type: Array, default: []},
+  follows: {type: Array, default:[]}
 });
 
 const validatePresenceOf = value => value && value.length;
