@@ -112,8 +112,8 @@ exports.signout = function (req, res) {
  */
 exports.show = function (req, res) {
   const user = req.profile;
-  respond(res, 'tpl/main', {
+  respond(res, {
     title: 'Dashboard',
     user: user
-  });
+  }, 200, 'tpl/main');
 };

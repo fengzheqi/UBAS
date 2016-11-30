@@ -17,7 +17,7 @@ module.exports = {
  * @param obj
  * @param status
  */
-function respond(res, tpl, obj, status) {
+function respond(res, obj, status, tpl) {
   res.format({
     html: () => res.render(tpl, obj),
     json: () => {

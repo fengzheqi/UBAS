@@ -4,8 +4,8 @@
  * @date 2016/10/10
  */
 
-var express = require('express');
-const staticData = require('../controllers/staticData.server.controller')
+const express = require('express');
+const staticData = require('../controllers/staticData.server.controller');
 
 module.exports = function (app) {
   app.route('/')

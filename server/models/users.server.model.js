@@ -57,8 +57,8 @@ const UserSchem = new Scheme({
     default: [],
   },
   follows: {
-    type: Array,
-    default: [],
+    type: Scheme.Types.Mixed,
+    default: {},
   },
 });
 
@@ -174,6 +174,10 @@ UserSchem.methods = {
   skipValidation: function () {
     return ~oAuthTypes.indexOf(this.provider);
   },
+  
+  updateAndSave: function () {
+    return this.save();
+  }
 };
 
 /**

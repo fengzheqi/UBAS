@@ -24,7 +24,7 @@ const StaticDataScheme = new Scheme({
     default: '',
   }, // 搜索关键字
   timestamp: {
-    type: String,
+    type: Number,
   }, // 时间戳
   address: {
     type: Object,
@@ -69,7 +69,7 @@ StaticDataScheme.methods = {
     this.system = data.system;
     this.browser = data.browser;
     this.ip = data.ip;
-    this.address = this.address;
+    this.address = this.location;
     return this.save();
   },
 };

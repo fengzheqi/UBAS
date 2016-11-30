@@ -104,15 +104,16 @@ module.exports = function (app, passport) {
     // should be declared after session and flash
     app.use(helpers(pkg.name));
 
-    if (env !== 'test') {
-        app.use(csrf());
-
-        // This could be moved to view-helpers :-)
-        app.use(function (req, res, next) {
-            res.locals.csrf_token = req.csrfToken();
-            next();
-        });
-    }
+  //TODO
+  //   if (env !== 'test') {
+  //       app.use(csrf());
+  //
+  //       // This could be moved to view-helpers :-)
+  //       app.use(function (req, res, next) {
+  //           res.locals.csrf_token = req.csrfToken();
+  //           next();
+  //       });
+  //   }
 
     // 配置路由
     fs.readdirSync(routes)
