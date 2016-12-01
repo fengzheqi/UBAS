@@ -11,7 +11,6 @@ const {wrap: async} = require('co');
 const {respond,respondOrRedirect} = require('../utils');
 const User = mongoose.model('User');
 const mailer = require('../mails');
-const port = process.env.PORT || 3000;
 
 /**
  * Load
@@ -51,7 +50,7 @@ exports.create = async(function *(req, res) {
   const user = new User(req.body);
   user.provider = 'local';
   try {
-    let baseUrl = req.protocol + '://' + req.hostname + ':' + port;
+    let baseUrl = req.protocol + '://' + req.hostname;
     mailer(user, baseUrl);
     yield user.save();
     req.logIn(user, err => {
