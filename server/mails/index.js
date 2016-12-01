@@ -12,11 +12,11 @@ const nodemailer = require('nodemailer');
 const markdown = require('nodemailer-markdown').markdown;
 const ejs = require('ejs');
 
-module.exports = function (obj) {
+module.exports = function (obj, baseUrl) {
   const mailSmatOption = 'smtps://' + process.env.MAIL_USER + ':' + process.env.MAIL_PASSWORD + '@' + process.env.MAIL_SMAT_SERVER;
   // const mailSmatOption = 'smtps://fengzheqiyx@163.com:163@2045635683@smtp.163.com';
   const transporter = nodemailer.createTransport(mailSmatOption);
-  const activeLink = process.env.SERVER_URL + '/register/' + obj.id + '?isActive=1';
+  const activeLink = baseUrl + '/register/' + obj.id + '?isActive=1';
 
   const mailOptions = {
     from: '"UBAS"<' + process.env.MAIL_USER + '>',

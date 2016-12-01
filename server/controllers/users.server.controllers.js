@@ -11,6 +11,7 @@ const {wrap: async} = require('co');
 const {respond,respondOrRedirect} = require('../utils');
 const User = mongoose.model('User');
 const mailer = require('../mails');
+const port = process.env.PORT || 3000;
 
 /**
  * Load
@@ -50,7 +51,8 @@ exports.create = async(function *(req, res) {
   const user = new User(req.body);
   user.provider = 'local';
   try {
-    mailer(user);
+    let baseUrl = req.protocol + '://' + req.hostname + ':' + port;
+    mailer(user, baseUrl);
     yield user.save();
     req.logIn(user, err => {
       if (err) req.flash('info', '对不起，您无法登录系统！');
