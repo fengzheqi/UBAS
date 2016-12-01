@@ -5,3 +5,6 @@
  */
 'use strict';
 
+module.exports = {
+  db: 'mongodb://107.170.227.250/ubas'
+}
