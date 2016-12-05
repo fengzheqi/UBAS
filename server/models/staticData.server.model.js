@@ -69,7 +69,7 @@ StaticDataScheme.methods = {
     this.system = data.system;
     this.browser = data.browser;
     this.ip = data.ip;
-    this.address = this.location;
+    this.address = data.address;
     return this.save();
   },
 };
