@@ -27,8 +27,8 @@ const StaticDataScheme = new Scheme({
     type: Number,
   }, // 时间戳
   address: {
-    type: Object,
-    default: null,
+    type: Scheme.Types.Mixed,
+    default: {},
   }, // 地理信息
   browser: {
     type: String,

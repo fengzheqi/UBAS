@@ -51,9 +51,12 @@ exports.update = async(function *(req, res) {
 exports.show = async(function *(req, res) {
   let user = yield User.load({select: 'follows', criteria:{_id: req.user.id}});
   let appList = Object.keys(user.follows);
+
   let app = [];
   for(let v of appList) {
     let item = {appId: v, appName: user.follows[v].name};
+    item.text = ';(function () {var s = document.createElement("script");s.id = "feDataReport";s.type= "text/javascript";s.src= "' +
+      req.protocol + '://' +req.hostname + '/static/reportData.js?appId=' + v + ';document.body.appendChild(s);s = null;})();';
     app.push(item);
   }
   respond(res, app, 200);
