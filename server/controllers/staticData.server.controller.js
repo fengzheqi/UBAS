@@ -24,10 +24,14 @@ exports.create = async(function *(req, res) {
   let browser = getBrowserType(data.userAgent);
   let ip='', address = {};
 
-  if(regex.test(req.connection.remoteAddress.trim())) {
-    ip = req.connection.remoteAddress.split('::ffff:')[1];
+  if (req.headers['x-real-ip']) {
+    ip = req.headers['x-real-ip'];
   } else {
-    ip = req.connection.remoteAddress;
+    if(regex.test(req.connection.remoteAddress.trim())) {
+      ip = req.connection.remoteAddress.split('::ffff:')[1];
+    } else {
+      ip = req.connection.remoteAddress;
+    }
   }
 
   let checkIpURL = 'http://ip.taobao.com/service/getIpInfo.php?ip=' + ip;
