@@ -37,9 +37,8 @@ exports.create = async(function *(req, res) {
   let checkIpURL = 'http://ip.taobao.com/service/getIpInfo.php?ip=' + ip;
   rqt(checkIpURL, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      address.country = body.country?body.country:'';
-      address.province = body.province?body.province:'';
-      address.city = body.city?body.city:'';
+      body = JSON.parse(body);
+      address = body.data;
     }
     staticData.saveData({
       keyword: keyword,
