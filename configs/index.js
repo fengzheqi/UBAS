@@ -12,18 +12,8 @@ const development = require('./env/devlopment');
 const production = require('./env/production');
 const test = require('./env/test');
 
-const notifier = {
-    service: 'postmark',
-    APN: false,
-    email: true, // true
-    actions: ['comment'],
-    tplPath: path.join(__dirname, '..', 'app/mailer/templates'),
-    key: 'POSTMARK_KEY'
-};
-
 const defaults = {
-    root: path.join(__dirname, '../'),
-    notifier : notifier
+    root: path.join(__dirname, '../')
 };
 
 /* Expose */

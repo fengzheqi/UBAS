@@ -17,7 +17,7 @@ exports.create = async(function *(req, res) {
   let appId = crypto.createHash('sha1').update((+new Date())+'').digest('hex');
   let user = yield User.load({select: 'follows', criteria:{_id: req.user.id}});
 
-  user.follows[appId] = {name: req.body.appName};
+  user.follows[appId] = {name: req.body.appName, timestamp: +new Date(), desc: req.body.appDesc};
   user.markModified('follows');
   user.updateAndSave();
   respond(res, {status:1}, 200);
@@ -40,6 +40,7 @@ exports.delete = async(function *(req, res) {
 exports.update = async(function *(req, res) {
   let user = yield User.load({select: 'follows', criteria:{_id: req.user.id}});
   user.follows[req.body.appId].name = req.body.appName;
+  user.follows[req.body.appId].desc = req.body.appDesc;
   user.markModified('follows');
   user.updateAndSave();
   respond(res, {status:1}, 200);
@@ -54,17 +55,18 @@ exports.show = async(function *(req, res) {
 
   let app = [];
   for(let v of appList) {
-    let item = {appId: v, appName: user.follows[v].name};
+    let item = {
+      appId: v,
+      appName: user.follows[v].name,
+      timestamp:user.follows[v].timestamp,
+      appDesc: user.follows[v].desc
+    };
     item.text = ';(function () {var s = document.createElement("script");s.id = "feDataReport";s.type= "text/javascript";s.src= "' +
       req.protocol + '://' +req.hostname + '/static/reportData.js?appId=' + v + ';document.body.appendChild(s);s = null;})();';
     app.push(item);
   }
   respond(res, app, 200);
 });
-
-
-
-
 
 
 exports.showStatic  = async(function *(req, res) {

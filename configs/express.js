@@ -32,8 +32,24 @@ const routes = path.join(__dirname, '../server/routes');
 
 const env = process.env.NODE_ENV || 'development';
 
+const webpack = require('webpack');   //定义webpack及其开发环境
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const webpackConfig = require('../webpack.config');
+const compiler = webpack(webpackConfig);
+
 /* Expose */
 module.exports = function (app, passport) {
+    /* 配置webpack dev开发环境 */
+    app.use(webpackDevMiddleware(compiler, {
+        publicPath: webpackConfig.output.publicPath,
+        stats: {
+            colors: true,
+            chunks: false
+        }
+    }));
+    app.use(webpackHotMiddleware(compiler));
+
     /* 压缩服务端静态文件 */
     app.use(compression({
         threshold: 512

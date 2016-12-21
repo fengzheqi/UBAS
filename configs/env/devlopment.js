@@ -6,5 +6,5 @@
 'use strict';
 
 module.exports = {
-    db: 'mongodb://119.29.226.250/ubas_dev'
+    db: 'mongodb://localhost/ubas_dev'
 }

@@ -1,0 +1,169 @@
+<template>
+  <!-- User Info, Notifications and Menu Bar -->
+  <nav class="navbar user-info-navbar" role="navigation">
+    <!-- Left links for user info navbar -->
+    <ul class="user-info-menu left-links list-inline list-unstyled">
+      <li class="hidden-sm hidden-xs">
+        <a href="#" data-toggle="sidebar">
+          <i class="fa-bars"></i>
+        </a>
+      </li>
+
+      <li class="dropdown hover-line">
+        <a href="#" data-toggle="dropdown">
+          <i class="fa-envelope-o"></i>
+          <span class="badge badge-green">1</span>
+        </a>
+
+        <ul class="dropdown-menu messages">
+          <li>
+            <ul class="dropdown-menu-list list-unstyled ps-scrollbar">
+              <li class="active"><!-- "active" class means message is unread -->
+                <a href="#">
+                <span class="line"><strong>用户注册通知</strong>
+                  <span class="light small">- 昨天</span>
+                </span>
+
+                  <span class="line desc small">
+                  新用户XX完成注册，项目名称：SMDB
+                </span>
+                </a>
+              </li>
+
+              <li class="active">
+                <a href="#">
+                <span class="line">
+                    <strong>报警通知</strong>
+                    <span class="light small">- 2天前</span>
+                </span>
+
+                  <span class="line desc small">
+                    系统cmis流量异常。
+                </span>
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                <span class="line">
+                  报警通知
+                  <span class="light small">- a week ago</span>
+                </span>
+
+                  <span class="line desc small">
+                  系统hsas流量异常。
+                </span>
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                <span class="line">
+                  报警通知
+                  <span class="light small">- 16 days ago</span>
+                </span>
+
+                  <span class="line desc small">
+                  系统smas流量异常。
+                </span>
+                </a>
+              </li>
+            </ul>
+
+          </li>
+
+          <li class="external">
+            <a href="blank-sidebar.html">
+              <span>所有邮件</span>
+              <i class="fa-link-ext"></i>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="dropdown hover-line">
+        <a href="#" data-toggle="dropdown">
+          <i class="fa-bell-o"></i>
+          <span class="badge badge-purple">7</span>
+        </a>
+
+        <ul class="dropdown-menu notifications">
+          <li class="top">
+            <p class="small">
+              <a href="#" class="pull-right">标记全部已读</a>
+              你有<strong>3</strong>条未读消息
+            </p>
+          </li>
+
+          <li>
+            <ul class="dropdown-menu-list list-unstyled ps-scrollbar">
+              <li class="active notification-success">
+                <a href="#">
+                  <i class="fa-user"></i>
+                  <span class="line"><strong>新用户注册</strong></span>
+                  <span class="line small time">30 seconds ago</span>
+                </a>
+              </li>
+
+              <li class="notification-info">
+                <a href="#">
+                  <i class="fa-database"></i>
+                  <span class="line">消息1</span>
+                  <span class="line small time">2016.11.12 4:00</span>
+                </a>
+              </li>
+
+              <li class="notification-warning">
+                <a href="#">
+                  <i class="fa-envelope-o"></i>
+                  <span class="line">消息2</span>
+                  <span class="line small time">上周</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="external">
+            <a href="#">
+              <span>查看所有消息</span>
+              <i class="fa-link-ext"></i>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+
+    <!-- Right links for user info navbar -->
+    <dropdown text="fengzheqi" type="primary" class="user-info-menu right-links list-inline list-unstyled">
+      <li><a href="#dropdown">个人信息</a></li>
+      <li><a href="#dropdown">设置</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="/signout">退出</a></li>
+    </dropdown>
+    <ul class="user-info-menu right-links list-inline list-unstyled">
+      <img src="/assets/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
+    </ul>
+
+  </nav>
+</template>
+
+<script>
+  import Dropdown from './ui/dropdown.vue';
+  export default {
+    components: {Dropdown}
+  }
+</script>
+
+<style lang="less">
+  .user-info-menu.right-links {
+    .btn {
+      background: #fff;
+      margin-top:20px;
+      margin-right: 20px;
+    }
+    img {
+      margin-top: 22px;
+    }
+  }
+</style>

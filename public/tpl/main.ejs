@@ -1,44 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<% include ./include/head.ejs %>
-
-<body class="page-body">
-
-<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
-
-  <% include pages/sidebar.ejs%>
-
-  <div class="main-content">
-    <% include include/nav.ejs%>
-    <% include pages/dashboard.ejs%>
-  </div>
-
-</div>
-
-
-<div class="page-loading-overlay">
-  <div class="loader-2"></div>
-</div>
-
-<!-- Bottom Scripts -->
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/TweenMax.min.js"></script>
-<script src="/js/resizeable.js"></script>
-<script src="/js/joinable.js"></script>
-<script src="/js/xenon-api.js"></script>
-<script src="/js/xenon-toggles.js"></script>
-
-
-<!-- Imported scripts on this page -->
-<script src="/js/xenon-widgets.js"></script>
-<script src="/js/devexpress-web-14.1/js/knockout-3.1.0.js"></script>
-<script src="/js/devexpress-web-14.1/js/globalize.min.js"></script>
-<script src="/js/devexpress-web-14.1/js/dx.chartjs.js"></script>
-
-
-<!-- JavaScripts initializations and stuff -->
-<script src="/js/xenon-custom.js"></script>
-
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/fonts/fontawesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/xenon-core.css">
+  <link rel="stylesheet" href="/css/xenon-forms.css">
+  <link rel="stylesheet" href="/css/xenon-components.css">
+  <link rel="stylesheet" href="/css/xenon-skins.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <title>UBAS-用户行为分析系统</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="/__build__/shared.js"></script>
+<script src="/__build__/app.js"></script>
 </body>
 </html>
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+
+<!---->
+
+<!--<body class="page-body">-->
+
+<!--<div id="app" class="page-container">&lt;!&ndash; add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always &ndash;&gt;-->
+
+  <!---->
+
+  <!--<div class="main-content">-->
+    <!---->
+
+  <!--</div>-->
+
+<!--</div>-->
+
+
+<!--<div class="page-loading-overlay">-->
+  <!--<div class="loader-2"></div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Bottom Scripts &ndash;&gt;-->
+<!--<script src="/js/bootstrap.min.js"></script>-->
+<!--<script src="/js/TweenMax.min.js"></script>-->
+<!--<script src="/js/resizeable.js"></script>-->
+<!--<script src="/js/joinable.js"></script>-->
+<!--<script src="/js/xenon-api.js"></script>-->
+<!--<script src="/js/xenon-toggles.js"></script>-->
+
+
+<!--&lt;!&ndash; Imported scripts on this page &ndash;&gt;-->
+<!--<script src="/js/xenon-widgets.js"></script>-->
+<!--<script src="/js/devexpress-web-14.1/js/knockout-3.1.0.js"></script>-->
+<!--<script src="/js/devexpress-web-14.1/js/globalize.min.js"></script>-->
+<!--<script src="/js/devexpress-web-14.1/js/dx.chartjs.js"></script>-->
+
+<!--&lt;!&ndash; JavaScripts initializations and stuff &ndash;&gt;-->
+<!--<script src="/js/xenon-custom.js"></script>-->
+
+<!--</body>-->
+<!--</html>-->
