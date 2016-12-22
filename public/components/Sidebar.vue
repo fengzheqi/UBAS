@@ -7,13 +7,13 @@
 
         <!-- logo -->
         <div class="logo">
-          <a href="dashboard-1.html" class="logo-expanded">
+          <router-link :to="{path:'/'}" class="logo-expanded">
             <img src="/assets/images/logo@2x.png" width="80" alt="" />
-          </a>
+          </router-link>
 
-          <a href="dashboard-1.html" class="logo-collapsed">
-            <img src="/assets/images/logo-collapsed@2x.png" width="40" alt="" />
-          </a>
+          <router-link :to="{path:'/app',query:{appId:$route.query.appId}}" class="logo-expanded">
+            <!--<img src="/assets/images/logo-collapsed@2x.png" width="40" alt="" />-->
+          </router-link>
         </div>
 
         <!-- This will toggle the mobile menu and will be visible only on mobile devices -->
@@ -29,105 +29,118 @@
         </div>
       </header>
 
-      <ul id="main-menu" class="main-menu">
-        <!-- add class "multiple-expanded" to allow multiple submenus to open -->
-        <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-        <li class="opened active">
-          <a href="#">
-            <i class="fa-dashboard"></i>
-            <span class="title">主面板</span>
-          </a>
-        </li>
-        <li>
-          <a href="layout-variants.html">
-            <i class="fa-area-chart"></i>
-            <span class="title">页面分析</span>
-          </a>
-          <ul>
-            <li>
-              <a href="layout-variants.html">
-                <span class="title">受访页面</span>
-              </a>
-            </li>
-            <li>
-              <a href="layout-collapsed-sidebar.html">
-                <span class="title">热力图</span>
-              </a>
-            </li>
-            <li>
-              <a href="layout-static-sidebar.html">
-                <span class="title">流向图</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="ui-panels.html">
-            <i class="fa-users"></i>
-            <span class="title">访客分析</span>
-          </a>
-          <ul>
-            <li>
-              <a href="ui-panels.html">
-                <span class="title">地域分布</span>
-              </a>
-            </li>
-            <li>
-              <a href="ui-buttons.html">
-                <span class="title">系统环境</span>
-              </a>
-            </li>
-            <li>
-              <a href="ui-tabs-accordions.html">
-                <span class="title">来源分析</span>
-              </a>
-            </li>
-            <li>
-              <a href="ui-modals.html">
-                <span class="title">终端设备</span>
-              </a>
-            </li>
-            <li>
-              <a href="ui-breadcrumbs.html">
-                <span class="title">停留时间</span>
-              </a>
-            </li>
-            <li>
-              <a href="ui-blockquotes.html">
-                <span class="title">新老用户</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="mailbox-main.html">
-            <i class="fa-gears"></i>
-            <span class="title">定制分析</span>
-          </a>
-          <ul>
-            <li>
-              <a href="mailbox-main.html">
-                <span class="title">自定义埋点</span>
-              </a>
-            </li>
-            <li>
-              <a href="mailbox-compose.html">
-                <span class="title">漏斗模型</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+      <el-menu default-active="2" class="sidebar-nav-menu">
+        <!-- 主面板 -->
+        <el-menu-item index="1" class="nav-item">
+          <router-link :to="{path:'/app',query:{appId:$route.query.appId}}"><i class="fa-dashboard"></i><span class="title">主面板</span></router-link>
+        </el-menu-item>
+        <!-- end 主面板 -->
 
+        <!-- 页面分析 -->
+        <el-submenu index="2">
+          <template slot="title"><i class="fa-area-chart"></i><span class="title">页面分析</span></template>
+
+          <el-menu-item index="2-1">
+            <router-link :to="{path:'app/visitPage',query:{appId:$route.query.appId}}"><span class="title">受访页面</span></router-link>
+          </el-menu-item>
+          <el-menu-item index="2-2">
+            <router-link :to="{path:'app/thermalMap',query:{appId:$route.query.appId}}"><span class="title">热力图</span></router-link>
+          </el-menu-item>
+          <el-menu-item index="2-3">
+            <router-link :to="{path:'app/flowMap',query:{appId:$route.query.appId}}"><span class="title">流向图</span></router-link>
+          </el-menu-item>
+        </el-submenu>
+        <!-- end 页面分析 -->
+
+        <!-- 访客分析 -->
+        <el-submenu index="3">
+          <template slot="title"> <i class="fa-users"></i><span class="title">访客分析</span></template>
+          <el-menu-item index="3-1">
+            <router-link :to="{path:'app/location',query:{appId:$route.query.appId}}"><span class="title">地域分布</span></router-link>
+          </el-menu-item>
+
+          <el-menu-item index="3-2">
+            <router-link :to="{path:'app/location',query:{appId:$route.query.appId}}"><span class="title">系统环境</span></router-link>
+          </el-menu-item>
+
+          <el-menu-item index="3-3">
+            <router-link :to="{path:'app/origin',query:{appId:$route.query.appId}}"><span class="title">来源分析</span></router-link>
+          </el-menu-item>
+
+          <el-menu-item index="3-4">
+            <router-link :to="{path:'app/terminal',query:{appId:$route.query.appId}}"><span class="title">终端设备</span></router-link>
+          </el-menu-item>
+
+          <el-menu-item index="3-5">
+            <router-link :to="{path:'app/standTime',query:{appId:$route.query.appId}}"><span class="title">停留时间</span></router-link>
+          </el-menu-item>
+
+          <el-menu-item index="3-6">
+            <router-link :to="{path:'app/newVisitor',query:{appId:$route.query.appId}}"><span class="title">新老用户</span></router-link>
+          </el-menu-item>
+        </el-submenu>
+        <!-- end 访客分析 -->
+
+        <!-- 定制分析 -->
+        <el-submenu index="4">
+          <template slot="title"> <i class="fa-gears"></i><span class="title">定制分析</span></template>
+
+          <el-menu-item index="4-1">
+            <router-link :to="{path:'app/buryPoint',query:{appId:$route.query.appId}}"><span class="title">自定义埋点</span></router-link>
+          </el-menu-item>
+
+          <el-menu-item index="4-2">
+            <router-link :to="{path:'app/funnelChart',query:{appId:$route.query.appId}}"><span class="title">漏斗模型</span></router-link>
+          </el-menu-item>
+        </el-submenu>
+        <!-- end 定制分析 -->
+      </el-menu>
     </div>
 
   </div>
 </template>
 
 <script>
+export default {
+
+}
 
 </script>
 
 <style lang="less">
+  .sidebar-nav-menu {
+    background: #2c2e2f;
+    padding:20px 40px;
+  }
+  .sidebar-nav-menu .active .title {
+    color: #fff;
+  }
 
+  .sidebar-nav-menu a {
+   color:#979898;
+  }
+
+  .sidebar-nav-menu .el-menu-item,
+  .sidebar-nav-menu .el-submenu__title {
+    background: #2c2e2f;
+    color:#979898;
+    border-bottom:1px solid #313437 ;
+  }
+  .sidebar-nav-menu .el-menu-item:hover,
+  .sidebar-nav-menu .el-submenu__title:hover,
+  .sidebar-nav-menu .el-menu-item a:hover,
+  .sidebar-nav-menu .el-submenu__title a:hover {
+    background: #2c2e2f;
+    color: #fff;
+  }
+
+  .el-menu-item i,
+  .el-submenu__title i {
+    margin-left: -16px;
+  }
+
+  .title {
+    display: inline-block;
+    margin-left: 15px;
+  }
 </style>

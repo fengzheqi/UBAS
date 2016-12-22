@@ -1,29 +1,33 @@
 <template>
-  <div id="app-list">
-    <div v-for="item in items" class="col-sm-3">
-      <div class="xe-widget xe-counter-block">
-        <div class="xe-upper">
-          <div class="xe-icon">
-            <i class="fa fa-line-chart" aria-hidden="true"></i>
+  <div id="app-list" class="row">
+      <div v-for="item in items" class="col-sm-3">
+
+        <router-link :to="{path:'app',query: {appId:item.appId }}">
+        <div class="xe-widget xe-counter-block">
+          <div class="xe-upper">
+            <div class="xe-icon">
+              <i class="fa fa-line-chart" aria-hidden="true"></i>
+            </div>
+            <div class="xe-label">
+              <strong class="num">{{item.appName}}</strong>
+              <span>创建时间： <br>{{item.timestamp | dateFormat}}</span>
+            </div>
           </div>
-          <div class="xe-label">
-            <strong class="num">{{item.appName}}</strong>
-            <span>创建时间： <br>{{item.timestamp | dateFormat}}</span>
+          <div class="xe-lower">
+            <div class="border"></div>
+            <strong>描述：</strong>
+            <span>{{item.appDesc}}</span>
           </div>
+          <button type="button" class="modify close" @click="toModifyApp(item.appId, item.appName, item.appDesc)">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+          <button type="button" class="delete close" @click="toDeleteApp(item.appId)">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
         </div>
-        <div class="xe-lower">
-          <div class="border"></div>
-          <strong>描述：</strong>
-          <span>{{item.appDesc}}</span>
-        </div>
-        <button type="button" class="modify close" @click="toModifyApp(item.appId, item.appName, item.appDesc)">
-          <span class="glyphicon glyphicon-pencil"></span>
-        </button>
-        <button type="button" class="delete close" @click="toDeleteApp(item.appId)">
-          <span class="glyphicon glyphicon-remove"></span>
-        </button>
+        </router-link>
       </div>
-    </div>
+
 
     <!--添加application-->
     <div class="col-sm-3" @click="toAddApp">
@@ -70,7 +74,7 @@
         :show.sync="showModifyModal"
         effect="zoom"
         width="200"
-        @closeModal="showModifyModal=false"
+        @closeModal="showModifyModal=false;appId='';appName='';appDesc=''"
         :callback="modifyApp">
       <div slot="modal-body" class="modal-body">
         <div class="form-horizontal">
@@ -122,6 +126,10 @@
       };
     },
     methods: {
+      toRoute(id) {
+        router.push({path:'app',query:{appId:id}})
+      },
+
       /* 添加项目 */
       toAddApp() {
         this.$set(this.$data,'showAddModal',true);
@@ -136,6 +144,9 @@
         }, (response)=>{
           console.log(response);
         });
+        this.$set(this.$data,'appId','');
+        this.$set(this.$data,'appName','');
+        this.$set(this.$data,'appDesc','');
         this.$set(this.$data,'showAddModal',false);
       },
 
@@ -156,6 +167,9 @@
         }, (response)=>{
           console.log(response);
         });
+        this.$set(this.$data,'appId','');
+        this.$set(this.$data,'appName','');
+        this.$set(this.$data,'appDesc','');
         this.$set(this.$data,'showModifyModal',false);
       },
 
@@ -178,6 +192,7 @@
         this.$set(this.$data,'showDeleteModal',false);
       }
     },
+
     mounted() {
       this.$http.get('/app', {path:"1"}).then((response)=>{
           this.$set(this.$data, 'items', response.body);

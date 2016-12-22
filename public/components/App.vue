@@ -3,21 +3,26 @@
     <sidebar></sidebar>
 
     <div class="main-content">
+      <!-- 头部导航 -->
       <main-nav></main-nav>
-      <app-list></app-list>
-      <dashboard></dashboard>
-      <button @click="testHttp">test</button>
-      <div id="main" style="width: auto;height: 500px;"></div>
+      <!--面包屑-->
+      <breadcrumb></breadcrumb>
+
+      <transition name="fade">
+      <router-view></router-view>
+      </transition>
+
+      <!-- 页脚 -->
+      <main-footer></main-footer>
     </div>
   </div>
 </template>
 
 <script>
-  import AppList from './AppList.vue';
   import Sidebar from './Sidebar.vue';
   import MainNav from './MainNav.vue';
-  import Dashboard from './Dashboard.vue';
-
+  import Breadcrumb from './Breadcrumb.vue';
+  import MainFooter from './MainFooter.vue';
 
   export default {
     methods: {
@@ -30,7 +35,7 @@
       }
     },
     components: {
-      Sidebar, MainNav, Dashboard, AppList
+      Sidebar, MainNav, Breadcrumb, MainFooter
     }
   }
 </script>

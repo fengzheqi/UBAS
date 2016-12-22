@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <div id="main" style="width: auto;height: 500px;"></div>
-  </div>
+  <div id="main" style="width: 100%;height: 500px;"></div>
 </template>
 
 <script>

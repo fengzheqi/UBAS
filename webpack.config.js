@@ -26,8 +26,15 @@ module.exports = {
       {test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
       {test: /\.vue$/, loader: 'vue'},
       {test: /\.css/, exclude: /^node_modules$/, loader: 'style-loader!css-loader'},
-      {test: /\.less/, exclude: /^node_modules$/, loader: 'style-loader!css-loader!less-loader'}
+      {test: /\.less/, exclude: /^node_modules$/, loader: 'style-loader!css-loader!less-loader'},
+      {test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/, loader: 'file-loader'}
     ]
+  },
+
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.common.js'
+    }
   },
 
   plugins: [

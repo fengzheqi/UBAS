@@ -1,5 +1,6 @@
 <template>
   <div id="dashbord" class="clearfix">
+    <div>{{$route.query.appId}}</div>
     <dashboard-data></dashboard-data>
     <dashboard-data-charts></dashboard-data-charts>
     <dashboard-data-lists></dashboard-data-lists>
@@ -7,9 +8,9 @@
 </template>
 
 <script>
-  import DashboardData from './dashboard/DashboardData.vue';
-  import DashboardDataCharts from './dashboard/DashboardDataCharts.vue';
-  import DashboardDataLists from './dashboard/DashboardDataLists.vue';
+  import DashboardData from './DashboardData.vue';
+  import DashboardDataCharts from './DashboardDataCharts.vue';
+  import DashboardDataLists from './DashboardDataLists.vue';
 
   export default {
     components: {DashboardData, DashboardDataCharts, DashboardDataLists}
