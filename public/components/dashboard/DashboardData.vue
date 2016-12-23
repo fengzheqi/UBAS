@@ -4,28 +4,30 @@
       <div>
         <i class="fa fa-users" aria-hidden="true"></i>
         <span>PV</span>
-        <span class="float-right">1000</span>
+        <span class="float-right" v-text="pv"></span>
       </div>
     </section>
     <section class="col-md-4">
       <div>
         <i class="fa fa-user" aria-hidden="true"></i>
         <span>UV</span>
-        <span class="float-right">400</span>
+        <span class="float-right" v-text="uv"></span>
       </div>
     </section>
     <section class="col-md-4">
       <div>
         <i class="fa fa-globe" aria-hidden="true"></i>
         <span>IP</span>
-        <span class="float-right">500</span>
+        <span class="float-right" v-text="ip"></span>
       </div>
     </section>
   </div>
 </template>
 
 <script>
-
+export default {
+  props: ['pv', 'uv', 'ip']
+}
 </script>
 
 <style lang="less">

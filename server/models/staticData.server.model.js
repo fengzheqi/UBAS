@@ -72,7 +72,11 @@ StaticDataScheme.methods = {
     this.address = data.address;
     return this.save();
   },
+  getIPCount: function () {
+    return this.find().distinct('ip').count();
+  }
 };
+
 
 mongoose.model('StaticData', StaticDataScheme);
 
