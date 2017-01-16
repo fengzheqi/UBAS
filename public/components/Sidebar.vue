@@ -36,61 +36,41 @@
         </el-menu-item>
         <!-- end 主面板 -->
 
-        <!-- 页面分析 -->
+        <!-- 流量分析 -->
         <el-submenu index="2">
-          <template slot="title"><i class="fa-area-chart"></i><span class="title">页面分析</span></template>
+          <template slot="title"><i class="fa-area-chart"></i><span class="title">流量分析</span></template>
 
           <el-menu-item index="2-1">
             <router-link :to="{path:'app/visitPage',query:{appId:$route.query.appId}}"><span class="title">受访页面</span></router-link>
           </el-menu-item>
           <el-menu-item index="2-2">
-            <router-link :to="{path:'app/thermalMap',query:{appId:$route.query.appId}}"><span class="title">热力图</span></router-link>
+            <router-link :to="{path:'app/thermalMap',query:{appId:$route.query.appId}}"><span class="title">路径分析</span></router-link>
           </el-menu-item>
           <el-menu-item index="2-3">
-            <router-link :to="{path:'app/flowMap',query:{appId:$route.query.appId}}"><span class="title">流向图</span></router-link>
+            <router-link :to="{path:'app/flowMap',query:{appId:$route.query.appId}}"><span class="title">用户留存率</span></router-link>
           </el-menu-item>
         </el-submenu>
         <!-- end 页面分析 -->
 
         <!-- 访客分析 -->
         <el-submenu index="3">
-          <template slot="title"> <i class="fa-users"></i><span class="title">访客分析</span></template>
+          <template slot="title"> <i class="fa-users"></i><span class="title">事件分析</span></template>
           <el-menu-item index="3-1">
-            <router-link :to="{path:'app/location',query:{appId:$route.query.appId}}"><span class="title">地域分布</span></router-link>
+            <router-link :to="{path:'/app/location',query:{appId:$route.query.appId}}"><span class="title">热点图分析</span></router-link>
           </el-menu-item>
 
           <el-menu-item index="3-2">
-            <router-link :to="{path:'app/location',query:{appId:$route.query.appId}}"><span class="title">系统环境</span></router-link>
-          </el-menu-item>
-
-          <el-menu-item index="3-3">
-            <router-link :to="{path:'app/origin',query:{appId:$route.query.appId}}"><span class="title">来源分析</span></router-link>
-          </el-menu-item>
-
-          <el-menu-item index="3-4">
-            <router-link :to="{path:'app/terminal',query:{appId:$route.query.appId}}"><span class="title">终端设备</span></router-link>
-          </el-menu-item>
-
-          <el-menu-item index="3-5">
-            <router-link :to="{path:'app/standTime',query:{appId:$route.query.appId}}"><span class="title">停留时间</span></router-link>
-          </el-menu-item>
-
-          <el-menu-item index="3-6">
-            <router-link :to="{path:'app/newVisitor',query:{appId:$route.query.appId}}"><span class="title">新老用户</span></router-link>
+            <router-link :to="{path:'/app/system',query:{appId:$route.query.appId}}"><span class="title">漏斗模型</span></router-link>
           </el-menu-item>
         </el-submenu>
         <!-- end 访客分析 -->
 
         <!-- 定制分析 -->
         <el-submenu index="4">
-          <template slot="title"> <i class="fa-gears"></i><span class="title">定制分析</span></template>
+          <template slot="title"> <i class="fa-gears"></i><span class="title">埋点配置</span></template>
 
           <el-menu-item index="4-1">
             <router-link :to="{path:'app/buryPoint',query:{appId:$route.query.appId}}"><span class="title">自定义埋点</span></router-link>
-          </el-menu-item>
-
-          <el-menu-item index="4-2">
-            <router-link :to="{path:'app/funnelChart',query:{appId:$route.query.appId}}"><span class="title">漏斗模型</span></router-link>
           </el-menu-item>
         </el-submenu>
         <!-- end 定制分析 -->

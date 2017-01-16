@@ -26,7 +26,7 @@
         }
       }
       var data = [];
-      var now = +new Date(1997, 9, 3);
+      var now = +new Date(2016, 12, 23);
       var oneDay = 24 * 3600 * 1000;
       var value = Math.random() * 1000;
       for (var i = 0; i < 1000; i++) {
@@ -35,7 +35,7 @@
 
       var option = {
         title: {
-          text: '动态数据 + 时间坐标轴'
+          text: ''
         },
         tooltip: {
           trigger: 'axis',
@@ -58,7 +58,7 @@
           type: 'value',
           boundaryGap: [0, '100%'],
           splitLine: {
-            show: false
+            show: true
           }
         },
         series: [{

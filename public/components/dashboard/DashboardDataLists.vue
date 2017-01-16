@@ -1,7 +1,10 @@
 <template>
  <div id="dashboard-data-lists">
     <el-table :data="dataLists" border style="width: 100%" ref="table">
-
+      <el-table-column
+          type="index"
+          width="50">
+      </el-table-column>
       <el-table-column
           prop="system"
           label="系统"

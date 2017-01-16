@@ -6,5 +6,5 @@
 'use strict';
 
 module.exports = {
-  db: 'mongodb://107.170.227.250/ubas'
+  db: 'mongodb://'+ process.env.DB_USER+':'+ process.env.DB_PWD + '@'+(process.env.DB_SERVER || 'localhost')+ '/ubas_dev'
 }
